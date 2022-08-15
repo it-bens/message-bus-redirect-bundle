@@ -1,0 +1,2 @@
+redirect_strategies:
+  - ITB\MessageBusRedirectBundle\RedirectStrategies\DecisionMakerStrategy

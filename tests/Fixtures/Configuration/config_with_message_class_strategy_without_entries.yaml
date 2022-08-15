@@ -1,0 +1,4 @@
+redirect_strategies:
+  - ITB\MessageBusRedirectBundle\RedirectStrategies\MessageClassStrategy
+
+message_classes:
