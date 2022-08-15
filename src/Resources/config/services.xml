@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+        https://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="itb_message_bus_redirect.message_bus_provider" class="ITB\MessageBusRedirectBundle\MessageBusProvider" public="false">
+            <argument/> <!-- filled in via compiler pass -->
+        </service>
+        <service alias="itb_message_bus_redirect.message_bus_provider" id="ITB\MessageBusRedirectBundle\MessageBusProvider" public="true"/>
+        <service id="itb_message_bus_redirect.redirect_strategy_provider" class="ITB\MessageBusRedirectBundle\RedirectStrategyProvider" public="false">
+            <argument type="tagged_locator" tag="itb_message_bus_redirect.redirect_strategy"/> <!-- without index-by key, the class service class is used as key -->
+            <argument/> <!-- filled in via bundle configuration -->
+        </service>
+        <service id="itb_message_bus_redirect.message_redirect_middleware" class="ITB\MessageBusRedirectBundle\MessageRedirectMiddleware" public="false">
+            <argument type="service" id="itb_message_bus_redirect.redirect_strategy_provider"/>
+            <argument type="service" id="itb_message_bus_redirect.message_bus_provider"/>
+        </service>
+        <service alias="itb_message_bus_redirect.message_redirect_middleware" id="ITB\MessageBusRedirectBundle\MessageRedirectMiddleware" public="true"/>
+
+        <!-- The redirect strategies are configured in the extension because they depend highly on the configuration. -->
+    </services>
+</container>
