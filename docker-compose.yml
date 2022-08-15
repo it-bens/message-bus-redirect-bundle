@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+  composer:
+    image: composer:2
+    volumes:
+      - .:/app
+
+  app:
+    build:
+      context: docker
+      dockerfile: development/Dockerfile
+    volumes:
+      - .:/var/www/html/

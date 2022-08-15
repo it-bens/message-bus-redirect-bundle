@@ -1,0 +1,23 @@
+{
+  "config": {
+    "verbosity": "debug",
+    "run-mode": "docker",
+    "run-exec": "docker-compose run --rm -T composer"
+  },
+  "pre-commit": {
+    "enabled": true,
+    "actions": [
+      {
+        "action": "vendor/bin/phpcbf --standard=PSR1,PSR12 {$STAGED_FILES|of-type:php}",
+        "conditions": [
+          {
+            "exec": "\\CaptainHook\\App\\Hook\\Condition\\FileStaged\\OfType",
+            "args": [
+              "php"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
