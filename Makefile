@@ -35,3 +35,19 @@ style-fix:
 
 code-check:
 	docker-compose run --rm -T app vendor/bin/phpstan analyse -c phpstan.neon --level 8
+
+test:
+	docker-compose run --rm -T app vendor/bin/phpunit -c phpunit.xml.dist
+
+
+github-composer-install:
+	composer install --no-interaction --no-progress --no-suggest --optimize-autoloader
+
+github-tests-phpunit: github-composer-install
+	./vendor/bin/phpunit -c ./phpunit.xml.dist
+
+github-tests-phpstan: github-composer-install
+	./vendor/bin/phpstan analyse -c ./phpstan.neon --level 8
+
+github-tests-codesniffer: github-composer-install
+	./vendor/bin/phpcs --standard=PSR1,PSR12 --exclude=Generic.Files.LineLength src tests
