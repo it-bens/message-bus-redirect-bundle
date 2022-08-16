@@ -1,6 +1,6 @@
 {
   "name": "it-bens/message-bus-redirect-bundle",
-  "description": "Bundle that allows reroute a messenge from one messenger bus to another.",
+  "description": "Bundle that allows redirect a messenge from one message bus to another.",
   "type": "symfony-bundle",
   "license": "MIT",
   "authors": [
